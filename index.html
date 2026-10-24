@@ -1,0 +1,194 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>潮汐之间 · 我的主页</title>
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: #f4f4ef;
+  font-family: "Microsoft YaHei", sans-serif;
+  background:
+    radial-gradient(ellipse at 75% 20%, #b99562 0%, transparent 25%),
+    linear-gradient(180deg, #244e66, #0a2d46 55%, #061725);
+}
+
+header {
+  padding: 26px 7%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff30;
+}
+
+header a {
+  color: #e5d3b0;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 12px;
+}
+
+.hero {
+  padding: 100px 7% 90px;
+  min-height: 62vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.label {
+  color: #e5c994;
+  letter-spacing: 4px;
+  font-size: 11px;
+}
+
+h1 {
+  font-size: clamp(44px, 8vw, 88px);
+  font-weight: 400;
+  margin: 25px 0 12px;
+  letter-spacing: 5px;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 400;
+  color: #e8d8ba;
+}
+
+.intro {
+  max-width: 480px;
+  color: #d5e0e5;
+  line-height: 2;
+  font-size: 14px;
+  margin: 22px 0 30px;
+}
+
+.btn {
+  display: inline-block;
+  width: fit-content;
+  padding: 13px 22px;
+  color: #102c3c;
+  background: #e5c994;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.links {
+  padding: 30px 7% 80px;
+}
+
+.links h2 {
+  font-size: 26px;
+  margin-bottom: 25px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.card {
+  padding: 24px;
+  min-height: 135px;
+  color: white;
+  text-decoration: none;
+  background: #061c2bbd;
+  border: 1px solid #ffffff30;
+  transition: .2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #e5c994;
+}
+
+.card h3 {
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.card p {
+  font-size: 12px;
+  color: #c2d0d8;
+  line-height: 1.8;
+}
+
+footer {
+  padding: 25px 7%;
+  color: #b6c5cc;
+  font-size: 11px;
+  border-top: 1px solid #ffffff30;
+}
+
+@media (max-width: 650px) {
+  .grid { grid-template-columns: 1fr; }
+  .hero { padding-top: 75px; }
+  header { padding: 22px 5%; }
+  header a { margin-left: 8px; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <span>BETWEEN TIDES</span>
+  <nav>
+    <a href="#about">关于</a>
+    <a href="#links">导航</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="about">
+  <div class="label">A SMALL PLACE OF MY OWN</div>
+  <h1>潮汐之间</h1>
+  <h2>在广阔世界里，慢慢成为自己。</h2>
+  <p class="intro">
+    这里收藏常去的地方、正在学习的事，
+    以及那些值得停留片刻的灵感。
+    海浪来去，而好奇心继续向前。
+  </p>
+  <a class="btn" href="#links">探索我的世界 ↗</a>
+</section>
+
+<section class="links" id="links">
+  <div class="label">PERSONAL COMPASS</div>
+  <h2>把常去的地方，放在这里。</h2>
+  <div class="grid">
+    <a class="card" href="https://www.nju.edu.cn/" target="_blank">
+      <h3>南京大学 ↗</h3>
+      <p>校园主页 · 学习与生活</p>
+    </a>
+    <a class="card" href="https://github.com/" target="_blank">
+      <h3>GitHub ↗</h3>
+      <p>代码、项目与创造</p>
+    </a>
+    <a class="card" href="https://www.bilibili.com/" target="_blank">
+      <h3>学习与灵感 ↗</h3>
+      <p>课程、视频和有趣的发现</p>
+    </a>
+    <a class="card" href="https://www.nature.com/" target="_blank">
+      <h3>科学世界 ↗</h3>
+      <p>生命、智能与未知的问题</p>
+    </a>
+    <a class="card" href="https://scholar.google.com/" target="_blank">
+      <h3>学术探索 ↗</h3>
+      <p>论文、研究与新想法</p>
+    </a>
+    <a class="card" href="https://outlook.live.com/" target="_blank">
+      <h3>邮箱 ↗</h3>
+      <p>整理消息与日常事务</p>
+    </a>
+  </div>
+</section>
+</main>
+
+<footer>BETWEEN TIDES · PERSONAL HOMEPAGE</footer>
+</body>
+</html>
+```
