@@ -1,203 +1,334 @@
-```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>潮汐之间 · 我的主页</title>
+<title>潮汐之间 · 个人导航</title>
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  color: #f4f4ef;
-  font-family: "Microsoft YaHei", sans-serif;
-    background:
-  linear-gradient(
-    90deg,
-    rgba(3, 16, 28, 0.65),
-    rgba(3, 16, 28, 0.18)
-  ),
-  linear-gradient(
-    0deg,
-    rgba(3, 16, 28, 0.45),
-    transparent 70%
-  ),
-  url("./ocean.jpg") center center / cover no-repeat fixed;
+:root {
+  --gold:#e9bd83;
+  --text:#f4f1e9;
+  --muted:#b9c9d0;
+  --panel:rgba(10,31,46,.72);
+  --line:rgba(229,220,203,.19);
 }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+  background:
+    linear-gradient(90deg,rgba(4,19,31,.86),rgba(4,23,36,.53)),
+    url("./ocean.jpg") center/cover fixed,
+    linear-gradient(145deg,#244e66,#0a2d46 60%,#061725);
+}
+a { color:inherit; text-decoration:none; }
+button,input { font:inherit; }
+.container { width:min(1120px,calc(100% - 40px)); margin:auto; }
 
 header {
-  padding: 26px 7%;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #ffffff30;
+  height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
 }
+.logo { color:var(--gold); letter-spacing:3px; font-size:13px; }
+.header-right { display:flex; gap:24px; font-size:13px; color:var(--muted); }
+.header-right a:hover { color:var(--gold); }
 
-header a {
-  color: #e5d3b0;
-  text-decoration: none;
-  margin-left: 20px;
-  font-size: 12px;
-}
-
-.hero {
-  padding: 100px 7% 90px;
-  min-height: 62vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.label {
-  color: #e5c994;
-  letter-spacing: 4px;
-  font-size: 11px;
-}
-
+.hero { padding:64px 0 34px; }
+.eyebrow { color:var(--gold); font-size:11px; letter-spacing:4px; }
 h1 {
-  font-size: clamp(44px, 8vw, 88px);
-  font-weight: 400;
-  margin: 25px 0 12px;
-  letter-spacing: 5px;
+  margin:16px 0 12px;
+  font-family:"Songti SC","SimSun",serif;
+  font-size:clamp(42px,7vw,72px);
+  font-weight:400;
+  letter-spacing:7px;
+}
+.hero p { color:var(--muted); font-size:14px; line-height:1.9; }
+
+.search {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  max-width:680px;
+  margin:28px 0 18px;
+  padding:0 18px;
+  height:52px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:rgba(7,25,39,.66);
+  backdrop-filter:blur(12px);
+}
+.search span { color:var(--gold); font-size:20px; }
+.search input {
+  width:100%;
+  color:var(--text);
+  background:transparent;
+  border:0;
+  outline:0;
+  font-size:14px;
+}
+.search input::placeholder { color:#93a9b3; }
+
+.filters { display:flex; flex-wrap:wrap; gap:9px; margin:0 0 36px; }
+.filter {
+  padding:9px 16px;
+  color:var(--muted);
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:rgba(8,28,42,.5);
+  cursor:pointer;
+  font-size:12px;
+  transition:.2s;
+}
+.filter:hover,.filter.active {
+  color:#182a35;
+  background:var(--gold);
+  border-color:var(--gold);
 }
 
-h2 {
-  font-size: 20px;
-  font-weight: 400;
-  color: #e8d8ba;
+.section { margin:0 0 38px; scroll-margin-top:20px; }
+.section-head {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:16px;
 }
+.section-head .bar { width:3px; height:22px; background:var(--gold); }
+.section-head h2 { margin:0; font-size:17px; font-weight:400; letter-spacing:2px; }
+.section-head p { margin:0 0 0 auto; font-size:11px; color:#a9bbc3; }
 
-.intro {
-  max-width: 480px;
-  color: #d5e0e5;
-  line-height: 2;
-  font-size: 14px;
-  margin: 22px 0 30px;
-}
-
-.btn {
-  display: inline-block;
-  width: fit-content;
-  padding: 13px 22px;
-  color: #102c3c;
-  background: #e5c994;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.links {
-  padding: 30px 7% 80px;
-}
-
-.links h2 {
-  font-size: 26px;
-  margin-bottom: 25px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-}
-
+.cards { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
 .card {
-  padding: 24px;
-  min-height: 135px;
-  color: white;
-  text-decoration: none;
-  background: #061c2bbd;
-  border: 1px solid #ffffff30;
-  transition: .2s;
+  min-height:112px;
+  padding:17px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:var(--panel);
+  backdrop-filter:blur(12px);
+  transition:transform .2s,border-color .2s,background .2s;
 }
-
 .card:hover {
-  transform: translateY(-4px);
-  border-color: #e5c994;
+  transform:translateY(-3px);
+  border-color:rgba(233,189,131,.7);
+  background:rgba(27,54,68,.9);
 }
-
-.card h3 {
-  font-size: 17px;
-  font-weight: 400;
+.card-top { display:flex; align-items:center; gap:10px; }
+.icon {
+  width:34px; height:34px;
+  display:grid; place-items:center;
+  flex-shrink:0;
+  border-radius:8px;
+  background:rgba(233,189,131,.12);
+  color:var(--gold);
+  font-size:14px;
 }
-
-.card p {
-  font-size: 12px;
-  color: #c2d0d8;
-  line-height: 1.8;
-}
-
+.card h3 { margin:0; font-size:14px; font-weight:500; }
+.card p { margin:12px 0 0; font-size:11px; color:var(--muted); line-height:1.6; }
+.empty { display:none; padding:28px 0; color:var(--muted); font-size:13px; }
 footer {
-  padding: 25px 7%;
-  color: #b6c5cc;
-  font-size: 11px;
-  border-top: 1px solid #ffffff30;
+  display:flex; justify-content:space-between; gap:12px;
+  padding:26px 0 32px;
+  border-top:1px solid var(--line);
+  color:#94a9b2; font-size:10px; letter-spacing:1.5px;
 }
 
-@media (max-width: 650px) {
-  .grid { grid-template-columns: 1fr; }
-  .hero { padding-top: 75px; }
-  header { padding: 22px 5%; }
-  header a { margin-left: 8px; }
+@media(max-width:850px) {
+  .cards { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+@media(max-width:560px) {
+  .container { width:calc(100% - 28px); }
+  header { height:65px; }
+  .header-right { gap:13px; font-size:12px; }
+  .logo { letter-spacing:1.5px; font-size:11px; }
+  .hero { padding-top:46px; }
+  h1 { letter-spacing:4px; }
+  .cards { grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
+  .card { padding:13px; min-height:108px; }
+  .section-head p { display:none; }
+  footer { flex-direction:column; }
 }
 </style>
 </head>
-
 <body>
+<div class="container">
 <header>
-  <span>BETWEEN TIDES</span>
-  <nav>
-    <a href="#about">关于</a>
-    <a href="#links">导航</a>
+  <a class="logo" href="#">BETWEEN TIDES</a>
+  <nav class="header-right">
+    <a href="#campus">校园</a>
+    <a href="#study">课程</a>
+    <a href="#ai">AI</a>
+    <a href="#research">科研</a>
   </nav>
 </header>
 
 <main>
-<section class="hero" id="about">
-  <div class="label">A SMALL PLACE OF MY OWN</div>
+<section class="hero">
+  <div class="eyebrow">PERSONAL WEB PORTAL · 2026</div>
   <h1>潮汐之间</h1>
-  <h2>在广阔世界里，慢慢成为自己。</h2>
-  <p class="intro">
-    这里收藏常去的地方、正在学习的事，
-    以及那些值得停留片刻的灵感。
-    海浪来去，而好奇心继续向前。
-  </p>
-  <a class="btn" href="#links">探索我的世界 ↗</a>
+  <p>把常用的世界，放在这里。<br>校园、课程、工具与远方的知识。</p>
+
+  <label class="search">
+    <span>⌕</span>
+    <input id="searchInput" type="search"
+      placeholder="搜索网站、课程或关键词……"
+      aria-label="搜索导航网站">
+  </label>
+  <div class="filters" id="filters">
+    <button class="filter active" data-filter="all">全部</button>
+    <button class="filter" data-filter="campus">南大校园</button>
+    <button class="filter" data-filter="study">课程学习</button>
+    <button class="filter" data-filter="ai">AI 工具</button>
+    <button class="filter" data-filter="research">AI 科研</button>
+    <button class="filter" data-filter="daily">常用网站</button>
+  </div>
 </section>
 
-<section class="links" id="links">
-  <div class="label">PERSONAL COMPASS</div>
-  <h2>把常去的地方，放在这里。</h2>
-  <div class="grid">
-    <a class="card" href="https://www.nju.edu.cn/" target="_blank">
-      <h3>南京大学 ↗</h3>
-      <p>校园主页 · 学习与生活</p>
+<div id="sections">
+
+<section class="section" id="campus" data-category="campus">
+  <div class="section-head"><span class="bar"></span><h2>南大校园</h2><p>CAMPUS & SERVICES</p></div>
+  <div class="cards">
+    <a class="card" href="https://www.nju.edu.cn/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">南</span><h3>南京大学</h3></div><p>学校官网 · 新闻与通知</p>
     </a>
-    <a class="card" href="https://github.com/" target="_blank">
-      <h3>GitHub ↗</h3>
-      <p>代码、项目与创造</p>
+    <a class="card" href="https://jw.nju.edu.cn/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">课</span><h3>教务处</h3></div><p>教学信息与教务通知</p>
     </a>
-    <a class="card" href="https://www.bilibili.com/" target="_blank">
-      <h3>学习与灵感 ↗</h3>
-      <p>课程、视频和有趣的发现</p>
+    <a class="card" href="https://lib.nju.edu.cn/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">书</span><h3>南京大学图书馆</h3></div><p>馆藏检索与学术资源</p>
     </a>
-    <a class="card" href="https://www.nature.com/" target="_blank">
-      <h3>科学世界 ↗</h3>
-      <p>生命、智能与未知的问题</p>
-    </a>
-    <a class="card" href="https://scholar.google.com/" target="_blank">
-      <h3>学术探索 ↗</h3>
-      <p>论文、研究与新想法</p>
-    </a>
-    <a class="card" href="https://outlook.live.com/" target="_blank">
-      <h3>邮箱 ↗</h3>
-      <p>整理消息与日常事务</p>
+    <a class="card" href="https://mail.nju.edu.cn/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">信</span><h3>南大邮箱</h3></div><p>校园邮件入口</p>
     </a>
   </div>
 </section>
+
+<section class="section" id="study" data-category="study">
+  <div class="section-head"><span class="bar"></span><h2>课程学习</h2><p>LEARN & PRACTICE</p></div>
+  <div class="cards">
+    <a class="card" href="https://www.icourse163.org/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">课</span><h3>中国大学 MOOC</h3></div><p>课程视频与公开课</p>
+    </a>
+    <a class="card" href="https://www.runoob.com/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">码</span><h3>菜鸟教程</h3></div><p>编程语言与基础教程</p>
+    </a>
+    <a class="card" href="https://leetcode.cn/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">题</span><h3>力扣</h3></div><p>算法与编程练习</p>
+    </a>
+    <a class="card" href="https://oi-wiki.org/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">知</span><h3>OI Wiki</h3></div><p>算法与计算机知识</p>
+    </a>
+  </div>
+</section>
+
+<section class="section" id="ai" data-category="ai">
+  <div class="section-head"><span class="bar"></span><h2>AI 工具</h2><p>TOOLS & CREATION</p></div>
+  <div class="cards">
+    <a class="card" href="https://chatgpt.com/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">AI</span><h3>ChatGPT</h3></div><p>问答、学习与创作</p>
+    </a>
+    <a class="card" href="https://www.deepseek.com/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">深</span><h3>DeepSeek</h3></div><p>对话与推理工具</p>
+    </a>
+    <a class="card" href="https://github.com/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">Git</span><h3>GitHub</h3></div><p>代码托管与项目协作</p>
+    </a>
+    <a class="card" href="https://huggingface.co/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">HF</span><h3>Hugging Face</h3></div><p>开源模型与数据集</p>
+    </a>
+  </div>
+</section>
+
+<section class="section" id="research" data-category="research">
+  <div class="section-head"><span class="bar"></span><h2>AI 科研</h2><p>PAPERS & RESEARCH</p></div>
+  <div class="cards">
+    <a class="card" href="https://scholar.google.com/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">学</span><h3>Google Scholar</h3></div><p>学术论文检索</p>
+    </a>
+    <a class="card" href="https://arxiv.org/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">预</span><h3>arXiv</h3></div><p>预印本论文库</p>
+    </a>
+    <a class="card" href="https://paperswithcode.com/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">复</span><h3>Papers with Code</h3></div><p>论文与代码资源</p>
+    </a>
+    <a class="card" href="https://www.nature.com/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">N</span><h3>Nature</h3></div><p>综合科学研究与论文</p>
+    </a>
+  </div>
+</section>
+
+<section class="section" id="daily" data-category="daily">
+  <div class="section-head"><span class="bar"></span><h2>常用网站</h2><p>EVERYDAY LINKS</p></div>
+  <div class="cards">
+    <a class="card" href="https://www.bilibili.com/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">B</span><h3>Bilibili</h3></div><p>视频与知识分享</p>
+    </a>
+    <a class="card" href="https://outlook.office.com/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">@</span><h3>Outlook</h3></div><p>邮件与日程</p>
+    </a>
+    <a class="card" href="https://www.wikipedia.org/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">W</span><h3>Wikipedia</h3></div><p>百科知识检索</p>
+    </a>
+    <a class="card" href="https://www.wolframalpha.com/" target="_blank" rel="noopener">
+      <div class="card-top"><span class="icon">∑</span><h3>WolframAlpha</h3></div><p>数学与科学计算</p>
+    </a>
+  </div>
+</section>
+</div>
+
+<div class="empty" id="empty">没有找到匹配的网站，试试其他关键词。</div>
 </main>
 
-<footer>BETWEEN TIDES · PERSONAL HOMEPAGE</footer>
+<footer>
+  <span>BETWEEN TIDES · PERSONAL PORTAL</span>
+  <span>保持好奇，继续探索。</span>
+</footer>
+</div>
+
+<script>
+const input = document.getElementById('searchInput');
+const buttons = [...document.querySelectorAll('.filter')];
+const sections = [...document.querySelectorAll('.section')];
+const empty = document.getElementById('empty');
+let active = 'all';
+
+function update() {
+  const query = input.value.trim().toLowerCase();
+  let visibleCount = 0;
+
+  sections.forEach(section => {
+    const category = section.dataset.category;
+    const categoryMatch = active === 'all' || active === category;
+    let cardCount = 0;
+
+    section.querySelectorAll('.card').forEach(card => {
+      const match = card.textContent.toLowerCase().includes(query);
+      const show = categoryMatch && match;
+      card.style.display = show ? '' : 'none';
+      if (show) cardCount++;
+    });
+
+    section.style.display = cardCount ? '' : 'none';
+    visibleCount += cardCount;
+  });
+
+  empty.style.display = visibleCount ? 'none' : 'block';
+}
+
+input.addEventListener('input', update);
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    active = button.dataset.filter;
+    buttons.forEach(b => b.classList.toggle('active', b === button));
+    update();
+  });
+});
+</script>
 </body>
 </html>
-```
